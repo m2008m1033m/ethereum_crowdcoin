@@ -1,0 +1,52 @@
+<h3>Requests</h3>
+
+<a [routerLink]="['', 'campaigns', campaignAddress, 'requests', 'create']"
+   class="ui button primary right floated"
+   style="margin-bottom: 10px">
+  Add Request
+</a>
+
+
+<table class="ui celled table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Recipient</th>
+    <th>Approval Count</th>
+    <th>Approve</th>
+    <th>Finalize</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let request of requests; let idx = index"
+      [ngClass]="{
+      'disabled': request.complete,
+      'positive': request.approvalCount >= contributerCount/2 && !request.complete
+      }">
+    <td>{{request.id}}</td>
+    <td>{{request.description}}</td>
+    <td>{{web3.utils.fromWei(request.value, 'ether')}} ether</td>
+    <td>{{request.recipient}}</td>
+    <td>{{request.approvalCount}}/{{contributerCount}}</td>
+    <td>
+      <button *ngIf="!request.complete" class="ui button green basic"
+              [disabled]="request.loading"
+              [ngClass]="{'loading': request.approving}"
+              (click)="approve(request)">
+        Approve
+      </button>
+    </td>
+    <td>
+      <button *ngIf="!request.complete" class="ui button teal basic"
+              [disabled]="request.loading"
+              [ngClass]="{'loading': request.finalizing}"
+              (click)="finalize(request)">
+        Finalize
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div>Found {{requests.length}} requests.</div>

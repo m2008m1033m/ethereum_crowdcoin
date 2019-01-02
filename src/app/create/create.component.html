@@ -1,0 +1,33 @@
+<h3>Create a Campaign</h3>
+
+<div *ngIf="errorMessage" class="ui negative message">
+  <i class="close icon" (click)="errorMessage = ''"></i>
+  <div class="header">
+    Oops!
+  </div>
+  <p>{{errorMessage}}</p>
+</div>
+
+<form class="ui form" (submit)="onSubmit()">
+  <div class="field">
+    <label>Minimum Contribution</label>
+
+    <div class="ui right labeled input">
+      <input type="number"
+             placeholder="Minimum Contribution"
+             name="minimum-contribution"
+             [(ngModel)]="minimumContribution">
+      <div class="ui label">
+        wei
+      </div>
+    </div>
+  </div>
+
+  <button class="ui button primary"
+          type="submit"
+          [ngClass]="{'loading': loading}"
+          [disabled]="!minimumContribution">
+    Create
+  </button>
+</form>
+

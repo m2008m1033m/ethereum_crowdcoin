@@ -1,0 +1,21 @@
+<h3>Open Campaigns</h3>
+<a class="ui button primary right floated"
+   [routerLink]="['', 'campaigns', 'create']">
+  <i class="add circle icon"></i>
+  Create Campaign
+</a>
+
+<div class="ui one column grid">
+  <div *ngFor="let campaign of campaigns" class="column">
+    <div class="ui card fluid">
+      <div class="content">
+        <div class="header">{{campaign}}</div>
+        <div class="meta"></div>
+        <div class="description">
+          <a [routerLink]="['', 'campaigns', campaign]">View Campaign</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

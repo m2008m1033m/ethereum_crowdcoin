@@ -1,0 +1,48 @@
+<h3>Create a Request</h3>
+
+<div *ngIf="errorMessage" class="ui negative message">
+  <i class="close icon" (click)="errorMessage = ''"></i>
+  <div class="header">
+    Oops!
+  </div>
+  <p>{{errorMessage}}</p>
+</div>
+
+<form class="ui form" (submit)="onSubmit()">
+  <div class="field">
+    <label>Description</label>
+    <div class="ui input">
+      <input type="text"
+             name="minimum-contribution"
+             [(ngModel)]="description">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Value</label>
+    <div class="ui right labeled input">
+      <input type="number"
+             name="minimum-contribution"
+             [(ngModel)]="value">
+      <div class="ui label">
+        ether
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Recipient</label>
+    <div class="ui input">
+      <input type="text"
+             name="minimum-contribution"
+             [(ngModel)]="recipient">
+    </div>
+  </div>
+
+  <button class="ui button primary"
+          type="submit"
+          [ngClass]="{'loading': loading}"
+          [disabled]="!description || !value || !recipient">
+    Create!
+  </button>
+</form>
